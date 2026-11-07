@@ -19,7 +19,9 @@ Only the web dashboard changes. The chat terminal inside it, the CLI and the TUI
 
 ## The themes
 
-Each palette is its own theme, named `Modern <Palette>`, the same way Hermes ships one theme per look.
+Each palette is its own theme, named `Modern <Palette>`, the same way Hermes ships one theme per look. Each card shows the dashboard in that theme and the exact colors it uses.
+
+[![All 26 themes: a dashboard preview and the colors of each](docs/all-themes.webp)](https://robertmonroe.github.io/hermes-agent-modern-theme/)
 
 **Grays** use the palette's darkest shades for the background, cards and surfaces:
 Neutral, Stone, Zinc, Slate, Gray, Mauve, Olive, Mist, Taupe

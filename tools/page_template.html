@@ -278,6 +278,11 @@ function card(name, t) {
   return art;
 }
 
+// ?shot renders only the theme grid, for the README image (tools/build_page.py).
+if (location.search.includes("shot")) {
+  for (const sel of [".top", ".hero", ".install", "footer"]) document.querySelector(sel).remove();
+  document.body.style.padding = "8px 0 24px";
+}
 const main = document.getElementById("main");
 const groups = [
   ["grays", "Grays", "Built from the palette's own shades: its darkest for the background, cards and surfaces, its lightest for text."],
