@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+
+# local copy of the hero; the published one lives in docs/
+/hermes-agent-modern-theme.webp

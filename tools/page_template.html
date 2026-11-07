@@ -106,6 +106,36 @@
   .uses .role { display: block; font-size: 12px; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .uses .hex { display: block; font-size: 11px; color: var(--muted); }
 
+  /* ---------- install ---------- */
+  .install { margin-top: 56px; padding-top: 8px; border-top: 1px solid var(--border); scroll-margin-top: 16px; }
+  .install h2 { margin: 40px 0 4px; font-size: 20px; letter-spacing: -0.02em; font-weight: 600; }
+  .install > p { margin: 0 0 24px; color: var(--muted); max-width: 70ch; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; counter-reset: step; }
+  .steps > li { display: grid; grid-template-columns: 32px 1fr; gap: 0 14px; counter-increment: step; }
+  .steps > li::before {
+    content: counter(step); grid-column: 1; grid-row: 1 / span 6; width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--surface); font-weight: 600; font-size: 13px;
+  }
+  .steps > li > * { grid-column: 2; min-width: 0; }
+  .steps h3 { margin: 3px 0 6px; font-size: 15px; font-weight: 600; }
+  .steps p, .steps ol { margin: 0 0 10px; color: var(--muted); max-width: 72ch; }
+  .steps ol { padding-left: 18px; }
+  .steps ol li { margin: 2px 0; }
+  .steps strong { color: var(--fg); font-weight: 500; }
+  .os { margin: 12px 0 4px; font-size: 13px; font-weight: 500; }
+  pre {
+    margin: 0 0 4px; padding: 12px 14px; overflow-x: auto; border-radius: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    font: 12.5px/1.6 'Geist Mono', ui-monospace, Consolas, monospace; color: var(--fg);
+  }
+  code.inline { font-family: 'Geist Mono', ui-monospace, Consolas, monospace; font-size: 12.5px; padding: 1px 5px; border-radius: 4px; background: var(--surface); color: var(--fg); }
+  .help { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .help div { padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); }
+  .help h4 { margin: 0 0 4px; font-size: 14px; font-weight: 600; }
+  .help p { margin: 0; color: var(--muted); font-size: 13px; }
+  @media (max-width: 800px) { .help { grid-template-columns: 1fr; } }
+  .theme-id { display: block; padding: 2px 16px 0; color: var(--muted); font-size: 12px; }
+
   /* ---------- footer ---------- */
   footer { border-top: 1px solid var(--border); color: var(--muted); }
   footer .wrap { padding-top: 24px; padding-bottom: 40px; display: grid; gap: 6px; }
@@ -118,6 +148,7 @@
     <nav>
       <a href="#grays">Grays</a>
       <a href="#colors">Colors</a>
+      <a href="#install">Install</a>
       <a href="https://github.com/robertmonroe/hermes-agent-modern-theme">GitHub</a>
     </nav>
   </div>
@@ -130,13 +161,64 @@
     <h1>26 themes for the Hermes Agent dashboard</h1>
     <p>A modern, flat look in every Tailwind CSS palette. Each preview shows the dashboard in that theme and the exact colors the theme uses.</p>
     <div class="actions">
-      <a class="btn primary" href="https://github.com/robertmonroe/hermes-agent-modern-theme#install">Install the themes</a>
+      <a class="btn primary" href="#install">How to install</a>
       <a class="btn" href="https://github.com/robertmonroe/hermes-agent-modern-theme/tree/main/themes">Browse theme files</a>
     </div>
   </div>
 </section>
 
 <main class="wrap" id="main"></main>
+
+<section class="wrap install" id="install">
+  <h2>How to install</h2>
+  <p>You only need Hermes Agent installed. No restart and no coding: download one small file, then pick it in the dashboard.</p>
+  <ol class="steps">
+    <li>
+      <h3>Pick a theme</h3>
+      <p>Each card above shows the theme's file name, for example <code class="inline">modern-slate</code> or <code class="inline">modern-blue</code>.</p>
+    </li>
+    <li>
+      <h3>Download it into Hermes</h3>
+      <p>Open a terminal and paste the commands for your system. They find your Hermes folder for you and save the theme in its <code class="inline">dashboard-themes</code> folder. Replace <code class="inline">modern-slate</code> (it appears twice) with the theme you picked.</p>
+      <div>
+        <div class="os">Windows (PowerShell)</div>
+<pre>$dir = Join-Path (Split-Path (hermes config path | Select-Object -Last 1)) "dashboard-themes"
+New-Item -ItemType Directory -Force $dir | Out-Null
+Invoke-WebRequest https://raw.githubusercontent.com/robertmonroe/hermes-agent-modern-theme/main/themes/modern-slate.yaml -OutFile "$dir\modern-slate.yaml"</pre>
+        <div class="os">macOS / Linux (Terminal)</div>
+<pre>dir="$(dirname "$(hermes config path | tail -n 1)")/dashboard-themes"
+mkdir -p "$dir"
+curl -fsSL https://raw.githubusercontent.com/robertmonroe/hermes-agent-modern-theme/main/themes/modern-slate.yaml -o "$dir/modern-slate.yaml"</pre>
+      </div>
+      <p>Want more than one? Run the last line again with another name.</p>
+    </li>
+    <li>
+      <h3>Turn it on</h3>
+      <ol>
+        <li>Open the dashboard. If it isn't running, start it with <code class="inline">hermes dashboard</code> and open the address it prints (usually http://127.0.0.1:9119).</li>
+        <li>Refresh the page.</li>
+        <li>At the bottom of the left sidebar, click the theme switcher. It shows the current theme's name, <strong>Hermes Teal</strong> by default.</li>
+        <li>Pick your theme, for example <strong>Modern Slate</strong>.</li>
+      </ol>
+      <p>Or switch from the terminal: <code class="inline">hermes config set dashboard.theme modern-slate</code></p>
+    </li>
+  </ol>
+  <div class="help">
+    <div>
+      <h4>Switch back</h4>
+      <p>Choose <strong>Hermes Teal</strong> in the theme switcher. To remove a theme, delete its <code class="inline">.yaml</code> file from <code class="inline">dashboard-themes</code>.</p>
+    </div>
+    <div>
+      <h4>Theme not in the list?</h4>
+      <p>Refresh the page. Still missing: the file belongs in <code class="inline">dashboard-themes</code> next to the <code class="inline">config.yaml</code> that <code class="inline">hermes config path</code> prints.</p>
+    </div>
+    <div>
+      <h4>Chat terminal didn't change?</h4>
+      <p>That's expected. These themes style the dashboard; the chat terminal keeps your Hermes skin. Parts still look old? Hard refresh with Ctrl+Shift+R.</p>
+    </div>
+  </div>
+  <p style="margin-top:24px">Want all 26? Use <a href="https://github.com/robertmonroe/hermes-agent-modern-theme/archive/refs/heads/main.zip">Download ZIP</a>, unzip it, and copy everything in its <code class="inline">themes</code> folder into <code class="inline">dashboard-themes</code>.</p>
+</section>
 
 <footer>
   <div class="wrap">
@@ -189,7 +271,10 @@ function card(name, t) {
       `<span class="role">${label}</span><span class="hex mono">${t[k]}</span>`;
     list.append(li);
   }
-  art.append(head, mock(t), list);
+  const id = document.createElement("span");
+  id.className = "theme-id mono";
+  id.textContent = "modern-" + name;
+  art.append(head, id, mock(t), list);
   return art;
 }
 

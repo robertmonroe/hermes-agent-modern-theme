@@ -4,13 +4,14 @@
     python make_themes.py --install            # build, then copy all into your Hermes dashboard-themes folder
     python make_themes.py --install slate zinc # build, then install only these
 
-Hermes looks for themes in <HERMES_HOME>/dashboard-themes (HERMES_HOME defaults to ~/.hermes).
+Hermes looks for themes in a dashboard-themes folder next to the config.yaml that `hermes config path` prints.
 Pick one from the theme switcher at the bottom of the dashboard sidebar.
 """
 import argparse
 import json
 import os
 import shutil
+import subprocess
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -111,6 +112,14 @@ customCSS: |
 
 
 def hermes_home() -> Path:
+    """Ask Hermes where its config lives; fall back to HERMES_HOME, then ~/.hermes."""
+    try:
+        out = subprocess.run(["hermes", "config", "path"], capture_output=True, text=True,
+                             timeout=60, shell=(os.name == "nt")).stdout.strip().splitlines()
+        if out and out[-1].endswith("config.yaml"):
+            return Path(out[-1]).parent
+    except (OSError, subprocess.SubprocessError):
+        pass
     env = os.environ.get("HERMES_HOME")
     return Path(env) if env else Path.home() / ".hermes"
 

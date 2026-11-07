@@ -4,7 +4,7 @@
 
 A modern, flat look for the [Hermes Agent](https://hermes-agent.nousresearch.com) web dashboard, in all 26 [Tailwind CSS](https://tailwindcss.com) color palettes.
 
-**[Browse the colors](https://robertmonroe.github.io/hermes-agent-modern-theme/):** every palette and shade, copyable as HEX, RGB, HSL, OKLCH, a Tailwind class or a CSS variable, with a preview of each palette's dashboard theme.
+**[See all 26 themes](https://robertmonroe.github.io/hermes-agent-modern-theme/):** a preview of the dashboard in each theme and the exact colors it uses.
 
 Hermes ships its dashboard with a retro look: pixel display fonts, ALL-CAPS labels, beveled buttons and square boxes. These themes keep everything working the same and change how it looks:
 
@@ -29,28 +29,64 @@ Red, Orange, Amber, Yellow, Lime, Green, Emerald, Teal, Cyan, Sky, Blue, Indigo,
 
 ## Install
 
-Copy the theme files you want from [`themes/`](themes) into the `dashboard-themes` folder of your Hermes home:
+You only need Hermes Agent installed. No restart, no coding.
 
-| System | Folder |
-|---|---|
-| macOS / Linux | `~/.hermes/dashboard-themes/` |
-| Windows | `%HERMES_HOME%\dashboard-themes\` (the Windows installer sets `HERMES_HOME`, usually `%LOCALAPPDATA%\hermes`) |
+### 1. Pick a theme
 
-Create the folder if it doesn't exist. Then refresh the dashboard and pick a theme from the theme switcher at the bottom of the sidebar, or set it from a terminal:
+Look through the [theme previews](https://robertmonroe.github.io/hermes-agent-modern-theme/) and note the theme's file name, for example `modern-slate` or `modern-blue`. Every name is `modern-` followed by the palette in lowercase.
 
-```bash
-hermes config set dashboard.theme modern-slate
+### 2. Download it into Hermes
+
+Open a terminal and paste the commands for your system. They find your Hermes folder for you, create a `dashboard-themes` folder inside it if needed, and download the theme there. Replace `modern-slate` (it appears twice) with the theme you picked.
+
+**Windows** (PowerShell):
+
+```powershell
+$dir = Join-Path (Split-Path (hermes config path | Select-Object -Last 1)) "dashboard-themes"
+New-Item -ItemType Directory -Force $dir | Out-Null
+Invoke-WebRequest https://raw.githubusercontent.com/robertmonroe/hermes-agent-modern-theme/main/themes/modern-slate.yaml -OutFile "$dir\modern-slate.yaml"
 ```
 
-With Python 3.9 or newer you can install from a clone instead:
+**macOS / Linux** (Terminal):
 
 ```bash
+dir="$(dirname "$(hermes config path | tail -n 1)")/dashboard-themes"
+mkdir -p "$dir"
+curl -fsSL https://raw.githubusercontent.com/robertmonroe/hermes-agent-modern-theme/main/themes/modern-slate.yaml -o "$dir/modern-slate.yaml"
+```
+
+Want more than one? Run the last line again with another name. Each theme is its own small file.
+
+### 3. Turn it on
+
+1. Open the dashboard. If it isn't running, start it with `hermes dashboard` and open the address it prints (usually http://127.0.0.1:9119).
+2. Refresh the page.
+3. At the bottom of the left sidebar, click the theme switcher (it shows the name of the current theme, "Hermes Teal" by default).
+4. Pick your theme, for example **Modern Slate**.
+
+Or switch from the terminal: `hermes config set dashboard.theme modern-slate`
+
+### Switch back or remove
+
+- **Back to the original look:** choose **Hermes Teal** in the theme switcher.
+- **Remove a theme:** delete its `.yaml` file from the `dashboard-themes` folder. `hermes config path` shows where your Hermes folder is; `dashboard-themes` sits next to that `config.yaml`.
+
+### Not working?
+
+- **The theme isn't in the switcher:** refresh the page. If it's still missing, check that the file is in the `dashboard-themes` folder next to the `config.yaml` that `hermes config path` prints, and that its name ends in `.yaml`.
+- **Some parts still look old:** do a hard refresh (Ctrl+Shift+R, or Cmd+Shift+R on a Mac).
+- **The chat terminal didn't change:** that's expected. These themes style the dashboard only; the chat terminal keeps your Hermes skin.
+
+### Install all 26 at once
+
+Click **Code → Download ZIP** at the top of this page, unzip it, and copy everything in its `themes` folder into your `dashboard-themes` folder. Or, if you have Git and Python 3.9+:
+
+```bash
+git clone https://github.com/robertmonroe/hermes-agent-modern-theme
+cd hermes-agent-modern-theme
 python make_themes.py --install              # all 26
-python make_themes.py --install slate zinc   # just these
+python make_themes.py --install slate blue   # or just these
 ```
-
-To remove a theme, delete its file from `dashboard-themes`.
-
 ## Customize
 
 | File | What it controls |
