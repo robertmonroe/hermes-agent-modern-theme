@@ -27,7 +27,7 @@ def mix(a: str, b: str, t: float) -> str:
 
 
 def gray_roles(s: dict) -> dict:
-    """shadcn's dark-mode mapping for a gray base."""
+    """A gray palette: its darkest shades for surfaces, its lightest for text."""
     return {"bg": s["950"], "card": s["900"], "surface": s["800"], "fg": s["50"],
             "muted": s["400"], "ring": s["500"], "primary": s["200"], "primary_fg": s["900"]}
 

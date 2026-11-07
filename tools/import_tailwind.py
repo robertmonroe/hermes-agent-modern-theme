@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# The order ui.shadcn.com/colors lists them in.
+# Grays first, then colors around the color wheel.
 GRAYS = ["neutral", "stone", "zinc", "slate", "gray", "mauve", "olive", "mist", "taupe"]
 COLORS = ["red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan",
           "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "rose"]
@@ -46,12 +46,14 @@ def main() -> None:
         raise SystemExit(__doc__)
     css = Path(sys.argv[1]).read_text(encoding="utf-8")
     found: dict[str, dict[str, str]] = {}
+    source: dict[str, dict[str, str]] = {}
     for name, shade, l, c, h in VAR.findall(css):
         l_val = float(l) / 100 if float(l) > 1 else float(l)
         hue = 0.0 if h == "none" else float(h)  # achromatic grays have no hue
         found.setdefault(name, {})[shade] = oklch_to_hex(l_val, float(c), hue)
+        source.setdefault(name, {})[shade] = f"oklch({l}% {c} {h if h != 'none' else 0})"
 
-    out = {"grays": {}, "colors": {}}
+    out = {"grays": {}, "colors": {}, "oklch": {}}
     for group, names in (("grays", GRAYS), ("colors", COLORS)):
         for name in names:
             shades = found.get(name, {})
@@ -59,6 +61,7 @@ def main() -> None:
             if missing:
                 raise SystemExit(f"{name}: missing shades {missing} in {sys.argv[1]}")
             out[group][name] = {s: shades[s] for s in SHADES}
+            out["oklch"][name] = {s: source[name][s] for s in SHADES}  # Tailwind's exact definitions
 
     target = ROOT / "palettes.json"
     target.write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
