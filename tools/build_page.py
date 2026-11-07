@@ -16,11 +16,10 @@ import make_themes  # noqa: E402  (shares the role mapping so previews match the
 def main() -> None:
     data = json.loads((ROOT / "palettes.json").read_text(encoding="utf-8"))
     roles = make_themes.palettes()
+    # Only the colors each theme actually uses (its roles), not the full palettes.
     payload = {
-        "grays": data["grays"],
-        "colors": data["colors"],
-        "oklch": data["oklch"],
-        "themes": {name: {k: r[k] for k in ("bg", "card", "surface", "primary")} for name, r in roles.items()},
+        "order": {"grays": list(data["grays"]), "colors": list(data["colors"])},
+        "themes": roles,
     }
     template = (ROOT / "tools" / "page_template.html").read_text(encoding="utf-8")
     html = template.replace("/*__DATA__*/null", json.dumps(payload, separators=(",", ":")))

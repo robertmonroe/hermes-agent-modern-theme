@@ -1,5 +1,7 @@
 # Hermes Agent Modern Theme
 
+![Hermes Agent Modern Theme: stacked dashboard screens, each in a different color theme](docs/hermes-agent-modern-theme.webp)
+
 A modern, flat look for the [Hermes Agent](https://hermes-agent.nousresearch.com) web dashboard, in all 26 [Tailwind CSS](https://tailwindcss.com) color palettes.
 
 **[Browse the colors](https://robertmonroe.github.io/hermes-agent-modern-theme/):** every palette and shade, copyable as HEX, RGB, HSL, OKLCH, a Tailwind class or a CSS variable, with a preview of each palette's dashboard theme.

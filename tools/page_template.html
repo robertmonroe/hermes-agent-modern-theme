@@ -3,8 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Colors · Hermes Agent Modern Theme</title>
-<meta name="description" content="Every Tailwind CSS color in HEX, RGB, HSL, OKLCH, class and CSS variable form, and the Hermes Agent dashboard theme built from each palette.">
+<title>Hermes Agent Modern Theme</title>
+<meta name="description" content="26 modern dashboard themes for Hermes Agent, one per Tailwind CSS palette. Each preview shows exactly the colors the theme uses.">
+<meta property="og:title" content="Hermes Agent Modern Theme">
+<meta property="og:description" content="26 modern dashboard themes for Hermes Agent, one per Tailwind CSS palette.">
+<meta property="og:image" content="https://robertmonroe.github.io/hermes-agent-modern-theme/hermes-agent-modern-theme.webp">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,7 +16,6 @@
   :root {
     --bg: #020618; --card: #0f172b; --surface: #1d293d; --fg: #f8fafc;
     --muted: #90a1b9; --ring: #62748e; --border: rgba(255,255,255,.10); --input: rgba(255,255,255,.15);
-    --radius: 10px;
     color-scheme: dark;
   }
   * { box-sizing: border-box; }
@@ -24,9 +27,8 @@
   }
   a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--ring); }
   a:hover { text-decoration-color: var(--fg); }
-  code, .mono { font-family: 'Geist Mono', ui-monospace, Consolas, monospace; }
+  .mono { font-family: 'Geist Mono', ui-monospace, Consolas, monospace; }
   :focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 60%, transparent); border-radius: 6px; }
-
   .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
   /* ---------- header ---------- */
@@ -37,91 +39,76 @@
   .top nav a { text-decoration: none; }
   .top nav a:hover { color: var(--fg); }
 
-  .hero { padding: 56px 0 28px; }
+  .hero { padding: 32px 0 8px; }
+  .hero-img {
+    display: block; width: 100%; height: auto; margin-bottom: 40px;
+    border-radius: 12px; border: 1px solid var(--border);
+  }
   .hero h1 { margin: 0 0 12px; font-size: clamp(30px, 5vw, 44px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; }
   .hero p { margin: 0; max-width: 62ch; color: var(--muted); font-size: 16px; }
   .hero .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
   .btn {
-    display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px;
-    border-radius: 6px; border: 1px solid var(--input); background: transparent; color: var(--fg);
-    font: 500 13px/1 inherit; text-decoration: none; cursor: pointer;
+    display: inline-flex; align-items: center; height: 36px; padding: 0 14px;
+    border-radius: 6px; border: 1px solid var(--input); color: var(--fg);
+    font-weight: 500; font-size: 13px; text-decoration: none;
   }
   .btn:hover { background: var(--surface); }
   .btn.primary { background: var(--fg); color: var(--card); border-color: var(--fg); }
   .btn.primary:hover { background: #e2e8f0; }
 
-  /* ---------- toolbar ---------- */
-  .bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-  .bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 10px; padding-bottom: 10px; }
-  .bar .label { color: var(--muted); }
-  .seg { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 8px; background: var(--surface); }
-  .seg button {
-    height: 28px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent;
-    color: var(--muted); font: 500 13px/1 inherit; cursor: pointer;
-  }
-  .seg button:hover { color: var(--fg); }
-  .seg button[aria-pressed="true"] { background: var(--bg); color: var(--fg); box-shadow: 0 0 0 1px var(--input); }
-  .jump { margin-left: auto; color: var(--muted); }
-  .jump select {
-    height: 32px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--input);
-    background: var(--card); color: var(--fg); font: inherit;
-  }
-
-  /* ---------- palettes ---------- */
+  /* ---------- groups ---------- */
   main { padding: 8px 0 64px; }
-  .group-title { margin: 44px 0 4px; font-size: 20px; letter-spacing: -0.02em; font-weight: 600; }
-  .group-note { margin: 0 0 8px; color: var(--muted); max-width: 70ch; }
+  .group-title { margin: 48px 0 4px; font-size: 20px; letter-spacing: -0.02em; font-weight: 600; scroll-margin-top: 16px; }
+  .group-note { margin: 0 0 20px; color: var(--muted); max-width: 70ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
 
-  .palette { padding: 22px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 64px; }
-  .palette:last-child { border-bottom: 0; }
-  .p-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-bottom: 12px; }
-  .p-head h3 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  /* ---------- theme card ---------- */
+  .theme { border: 1px solid var(--border); border-radius: 12px; background: var(--card); overflow: hidden; }
+  .theme-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 14px 16px 0; }
+  .theme-head h3 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .theme-head a { color: var(--muted); font-size: 12px; text-decoration: none; }
+  .theme-head a:hover { color: var(--fg); }
 
-  .theme-chip {
-    display: inline-flex; align-items: center; gap: 10px; padding: 4px 6px 4px 4px;
-    border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--muted);
+  /* mock dashboard, painted entirely with the theme's own colors */
+  .mock {
+    margin: 12px 16px 0; height: 168px; border-radius: 8px; overflow: hidden;
+    display: grid; grid-template-columns: 30% 1fr;
+    background: var(--t-bg); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
   }
-  .theme-chip:hover { color: var(--fg); border-color: var(--input); }
-  .mini { display: grid; grid-template-columns: 14px 1fr; gap: 3px; width: 64px; height: 26px; padding: 3px; border-radius: 5px; }
-  .mini i { border-radius: 2px; display: block; }
-  .mini .side { grid-row: span 2; }
-  .mini .accent { height: 4px; width: 60%; align-self: end; }
+  .mock .side { background: var(--t-card); border-right: 1px solid rgba(255,255,255,.08); padding: 12px 8px; display: grid; align-content: start; gap: 5px; }
+  .mock .brandline { height: 6px; width: 60%; border-radius: 3px; background: var(--t-fg); margin: 0 4px 6px; }
+  .mock .nav { display: flex; align-items: center; gap: 6px; height: 16px; padding: 0 6px; border-radius: 4px; }
+  .mock .nav i { width: 6px; height: 6px; border-radius: 2px; background: var(--t-muted); flex: none; }
+  .mock .nav b { height: 4px; border-radius: 2px; background: var(--t-muted); opacity: .8; }
+  .mock .nav.on { background: color-mix(in srgb, var(--t-primary) 14%, var(--t-surface)); }
+  .mock .nav.on i { background: var(--t-primary); }
+  .mock .nav.on b { background: var(--t-fg); opacity: 1; }
+  .mock .body { padding: 12px; display: grid; align-content: start; gap: 9px; }
+  .mock .title { height: 7px; width: 34%; border-radius: 3px; background: var(--t-fg); }
+  .mock .tabs { display: inline-flex; gap: 2px; padding: 2px; border-radius: 5px; background: var(--t-surface); width: max-content; }
+  .mock .tabs span { width: 22px; height: 10px; border-radius: 3px; }
+  .mock .tabs span:first-child { background: var(--t-bg); box-shadow: 0 0 0 1px rgba(255,255,255,.15); }
+  .mock .panel { background: var(--t-card); border: 1px solid rgba(255,255,255,.10); border-radius: 6px; padding: 9px; display: grid; gap: 6px; }
+  .mock .line { height: 4px; border-radius: 2px; background: var(--t-muted); opacity: .85; }
+  .mock .line.fg { background: var(--t-fg); opacity: 1; width: 45%; height: 5px; }
+  .mock .row { display: flex; gap: 6px; margin-top: 2px; }
+  .mock .btn-p { height: 14px; width: 46px; border-radius: 4px; background: var(--t-primary); display: grid; place-items: center; }
+  .mock .btn-p::after { content: ""; height: 3px; width: 22px; border-radius: 2px; background: var(--t-primary-fg); }
+  .mock .btn-o { height: 14px; width: 40px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.15); }
+  .mock .focus { box-shadow: 0 0 0 2px var(--t-ring); }
 
-  .swatches { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 8px; }
-  .sw {
-    display: flex; flex-direction: column; gap: 6px; padding: 0; border: 0; background: none;
-    color: inherit; text-align: left; cursor: pointer; min-width: 0;
-  }
-  .sw .chip { height: 56px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); transition: transform .12s ease; }
-  .sw:hover .chip { transform: translateY(-2px); }
-  .sw .shade { font-weight: 500; font-size: 12px; }
-  .sw .val { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .sw.copied .val { color: var(--fg); }
-
-  @media (max-width: 860px) {
-    .swatches { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-    .jump { margin-left: 0; }
-  }
-  @media (max-width: 480px) {
-    .swatches { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .top nav { gap: 14px; }
-  }
+  /* the colors this theme uses */
+  .uses { list-style: none; margin: 0; padding: 14px 16px 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 10px; }
+  .uses li { min-width: 0; }
+  .uses .chip { display: block; height: 28px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.10); margin-bottom: 6px; }
+  .uses .role { display: block; font-size: 12px; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .uses .hex { display: block; font-size: 11px; color: var(--muted); }
 
   /* ---------- footer ---------- */
   footer { border-top: 1px solid var(--border); color: var(--muted); }
   footer .wrap { padding-top: 24px; padding-bottom: 40px; display: grid; gap: 6px; }
-
-  .toast {
-    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 12px); opacity: 0;
-    padding: 10px 14px; border-radius: 8px; background: var(--fg); color: var(--card);
-    font-weight: 500; pointer-events: none; transition: opacity .15s ease, transform .15s ease;
-  }
-  .toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
-    .sw:hover .chip { transform: none; }
-  }
 </style>
 </head>
 <body>
@@ -138,8 +125,10 @@
 
 <section class="hero">
   <div class="wrap">
-    <h1>Colors</h1>
-    <p>All 26 Tailwind CSS palettes, every shade, in the format you need. Click any swatch to copy it. Each palette is also a ready-made theme for the Hermes Agent dashboard.</p>
+    <img class="hero-img" src="hermes-agent-modern-theme.webp" width="1672" height="941"
+         alt="Hermes Agent Modern Theme: stacked dashboard screens, each in a different color theme">
+    <h1>26 themes for the Hermes Agent dashboard</h1>
+    <p>A modern, flat look in every Tailwind CSS palette. Each preview shows the dashboard in that theme and the exact colors the theme uses.</p>
     <div class="actions">
       <a class="btn primary" href="https://github.com/robertmonroe/hermes-agent-modern-theme#install">Install the themes</a>
       <a class="btn" href="https://github.com/robertmonroe/hermes-agent-modern-theme/tree/main/themes">Browse theme files</a>
@@ -147,161 +136,78 @@
   </div>
 </section>
 
-<div class="bar">
-  <div class="wrap">
-    <span class="label" id="fmt-label">Copy as</span>
-    <div class="seg" role="group" aria-labelledby="fmt-label" id="formats"></div>
-    <label class="jump">Jump to
-      <select id="jump"></select>
-    </label>
-  </div>
-</div>
-
 <main class="wrap" id="main"></main>
 
 <footer>
   <div class="wrap">
-    <span>Colors are the Tailwind CSS v4 palette (MIT). Hex values are converted from Tailwind's OKLCH definitions.</span>
+    <span>Colors come from the Tailwind CSS v4 palette (MIT).</span>
     <span>Not affiliated with or endorsed by Nous Research or Tailwind Labs. <a href="https://github.com/robertmonroe/hermes-agent-modern-theme">Source on GitHub</a>, MIT license.</span>
   </div>
 </footer>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
 <script>
 const DATA = /*__DATA__*/null;
-const REPO = "https://github.com/robertmonroe/hermes-agent-modern-theme/blob/main/themes/";
-const FORMATS = [
-  ["hex", "HEX"], ["rgb", "RGB"], ["hsl", "HSL"], ["oklch", "OKLCH"], ["class", "Class"], ["var", "CSS var"],
+const FILES = "https://github.com/robertmonroe/hermes-agent-modern-theme/blob/main/themes/";
+const ROLES = [
+  ["bg", "Background"], ["card", "Cards"], ["surface", "Surfaces"], ["fg", "Text"],
+  ["muted", "Muted text"], ["primary", "Accent"], ["primary_fg", "Accent text"], ["ring", "Focus ring"],
 ];
-const SHADES = ["50","100","200","300","400","500","600","700","800","900","950"];
-
-const rgbOf = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
-function hslOf(hex) {
-  const [r, g, b] = rgbOf(hex).map(v => v / 255);
-  const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2;
-  let h = 0, s = 0;
-  if (max !== min) {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
-    h *= 60;
-  }
-  return `hsl(${Math.round(h)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%)`;
-}
-function value(fmt, name, shade, hex) {
-  switch (fmt) {
-    case "rgb": return `rgb(${rgbOf(hex).join(" ")})`;
-    case "hsl": return hslOf(hex);
-    case "oklch": return DATA.oklch[name][shade];
-    case "class": return `bg-${name}-${shade}`;
-    case "var": return `var(--color-${name}-${shade})`;
-    default: return hex;
-  }
-}
-
-let fmt = "hex";
-try { fmt = localStorage.getItem("hamt-format") || "hex"; } catch (e) {}
-if (!FORMATS.some(([k]) => k === fmt)) fmt = "hex";
-
 const cap = s => s[0].toUpperCase() + s.slice(1);
+
+function mock(t) {
+  const el = document.createElement("div");
+  el.className = "mock";
+  el.setAttribute("aria-hidden", "true");
+  for (const [k] of ROLES) el.style.setProperty("--t-" + k.replace("_", "-"), t[k]);
+  el.innerHTML =
+    `<div class="side"><div class="brandline"></div>` +
+      `<div class="nav"><i></i><b style="width:55%"></b></div>` +
+      `<div class="nav on"><i></i><b style="width:62%"></b></div>` +
+      `<div class="nav"><i></i><b style="width:45%"></b></div>` +
+      `<div class="nav"><i></i><b style="width:58%"></b></div>` +
+      `<div class="nav"><i></i><b style="width:40%"></b></div></div>` +
+    `<div class="body"><div class="title"></div>` +
+      `<div class="tabs"><span></span><span></span><span></span></div>` +
+      `<div class="panel"><div class="line fg"></div><div class="line" style="width:88%"></div>` +
+        `<div class="line" style="width:70%"></div>` +
+        `<div class="row"><div class="btn-p"></div><div class="btn-o focus"></div></div></div></div>`;
+  return el;
+}
+
+function card(name, t) {
+  const art = document.createElement("article");
+  art.className = "theme"; art.id = name;
+  const head = document.createElement("div");
+  head.className = "theme-head";
+  head.innerHTML = `<h3>Modern ${cap(name)}</h3><a href="${FILES}modern-${name}.yaml">Theme file</a>`;
+  const list = document.createElement("ul");
+  list.className = "uses";
+  list.setAttribute("aria-label", `Colors used by Modern ${cap(name)}`);
+  for (const [k, label] of ROLES) {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="chip" style="background:${t[k]}"></span>` +
+      `<span class="role">${label}</span><span class="hex mono">${t[k]}</span>`;
+    list.append(li);
+  }
+  art.append(head, mock(t), list);
+  return art;
+}
+
 const main = document.getElementById("main");
-const jump = document.getElementById("jump");
-
-function themeChip(name) {
-  const t = DATA.themes[name];
-  const a = document.createElement("a");
-  a.className = "theme-chip";
-  a.href = REPO + "modern-" + name + ".yaml";
-  a.title = "Open the Modern " + cap(name) + " theme file";
-  a.innerHTML =
-    `<span class="mini" style="background:${t.bg}">` +
-      `<i class="side" style="background:${t.card}"></i>` +
-      `<i style="background:${t.surface}"></i>` +
-      `<i class="accent" style="background:${t.primary}"></i>` +
-    `</span>Modern ${cap(name)} theme`;
-  return a;
+const groups = [
+  ["grays", "Grays", "Built from the palette's own shades: its darkest for the background, cards and surfaces, its lightest for text."],
+  ["colors", "Colors", "A near-black background tinted with the color, and the color itself for the accent: the active item, buttons and focus rings."],
+];
+for (const [key, title, note] of groups) {
+  const h = document.createElement("h2");
+  h.className = "group-title"; h.id = key; h.textContent = title;
+  const p = document.createElement("p");
+  p.className = "group-note"; p.textContent = note;
+  const grid = document.createElement("div");
+  grid.className = "grid";
+  for (const name of DATA.order[key]) grid.append(card(name, DATA.themes[name]));
+  main.append(h, p, grid);
 }
-
-function render() {
-  main.innerHTML = "";
-  jump.innerHTML = "";
-  const groups = [
-    ["grays", "Grays", "Neutral tones for backgrounds, borders and text. Their dashboard themes use the darkest shades for surfaces and the lightest for text."],
-    ["colors", "Colors", "Their dashboard themes use a near-black background tinted with the color, and the color itself for the active item, buttons and focus rings."],
-  ];
-  for (const [key, title, note] of groups) {
-    const h = document.createElement("h2");
-    h.className = "group-title"; h.id = key; h.textContent = title;
-    const p = document.createElement("p");
-    p.className = "group-note"; p.textContent = note;
-    main.append(h, p);
-    const og = document.createElement("optgroup"); og.label = title; jump.append(og);
-
-    for (const [name, shades] of Object.entries(DATA[key])) {
-      const sec = document.createElement("section");
-      sec.className = "palette"; sec.id = name;
-      sec.setAttribute("aria-label", cap(name));
-      const head = document.createElement("div");
-      head.className = "p-head";
-      const h3 = document.createElement("h3"); h3.textContent = cap(name);
-      head.append(h3, themeChip(name));
-      const grid = document.createElement("div");
-      grid.className = "swatches";
-      for (const shade of SHADES) {
-        const hex = shades[shade];
-        const v = value(fmt, name, shade, hex);
-        const b = document.createElement("button");
-        b.className = "sw"; b.type = "button";
-        b.setAttribute("aria-label", `Copy ${name}-${shade}: ${v}`);
-        b.title = `${name}-${shade}  ${v}`;
-        b.innerHTML = `<span class="chip" style="background:${hex}"></span>` +
-          `<span class="shade">${shade}</span><span class="val mono">${v}</span>`;
-        b.addEventListener("click", () => copy(b, v));
-        grid.append(b);
-      }
-      sec.append(head, grid);
-      main.append(sec);
-      const opt = document.createElement("option");
-      opt.value = name; opt.textContent = cap(name); og.append(opt);
-    }
-  }
-}
-
-function renderFormats() {
-  const seg = document.getElementById("formats");
-  seg.innerHTML = "";
-  for (const [k, label] of FORMATS) {
-    const b = document.createElement("button");
-    b.type = "button"; b.textContent = label;
-    b.setAttribute("aria-pressed", String(k === fmt));
-    b.addEventListener("click", () => {
-      fmt = k;
-      try { localStorage.setItem("hamt-format", k); } catch (e) {}
-      renderFormats(); render();
-    });
-    seg.append(b);
-  }
-}
-
-const toast = document.getElementById("toast");
-let toastTimer;
-async function copy(btn, text) {
-  let ok = true;
-  try { await navigator.clipboard.writeText(text); } catch (e) { ok = false; }
-  toast.textContent = ok ? `Copied ${text}` : `Copy failed. Value: ${text}`;
-  toast.classList.add("show");
-  btn.classList.add("copied");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toast.classList.remove("show"); btn.classList.remove("copied"); }, 1400);
-}
-
-jump.addEventListener("change", () => {
-  document.getElementById(jump.value)?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-});
-
-renderFormats();
-render();
 </script>
 </body>
 </html>
