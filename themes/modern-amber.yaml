@@ -164,17 +164,21 @@ customCSS: |
   button[role="combobox"] { border-radius: 6px !important; border-color: var(--sh-input) !important; }
   [role="listbox"] { border-radius: 8px !important; overflow: hidden; }
 
-  /* toggles: softly rounded track and knob, accent when on */
+  /* toggles: 32x18 pill, 16px round knob; accent track when on, faint track when off */
   button[role="switch"] {
-    border-radius: 6px !important; border-color: var(--sh-input) !important;
-    background: var(--sh-surface) !important;
+    width: 32px !important; height: 18.4px !important; padding: 0 !important;
+    border: 1px solid transparent !important; border-radius: 999px !important;
+    background: color-mix(in srgb, var(--sh-input) 80%, transparent) !important;
+    transition: background-color .15s ease !important;
   }
-  button[role="switch"] > span { border-radius: 4px !important; background: var(--sh-muted) !important; }
-  button[role="switch"][aria-checked="true"] {
-    background: var(--sh-primary) !important; border-color: transparent !important;
+  button[role="switch"] > span {
+    width: 16px !important; height: 16px !important; border-radius: 999px !important;
+    background: var(--sh-fg) !important; translate: 0 0 !important;
+    transition: translate .15s ease !important;
   }
+  button[role="switch"][aria-checked="true"] { background: var(--sh-primary) !important; }
   button[role="switch"][aria-checked="true"] > span {
-    background: var(--sh-primary-fg) !important; translate: 18px 0 !important;
+    background: var(--sh-primary-fg) !important; translate: 14px 0 !important;
   }
 
   input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
