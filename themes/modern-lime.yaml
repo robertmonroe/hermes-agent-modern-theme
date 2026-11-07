@@ -112,7 +112,7 @@ customCSS: |
     border-radius: 6px !important;
     background: transparent !important;
     font-size: 13px !important; font-weight: 500 !important;
-    padding: 6px 12px !important; gap: 6px;
+    padding: 6px 12px !important; gap: 6px; line-height: 20px !important;
     transition: background-color .12s ease;
   }
   button[class*="shadow-[inset"]:hover { background: var(--sh-surface) !important; }
@@ -164,6 +164,100 @@ customCSS: |
     outline: none !important;
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--sh-ring) 50%, transparent) !important;
   }
+
+  /* ---------- Achievements plugin page ----------
+     Surfaces, text and borders follow the theme. The tier color (copper,
+     silver, gold, diamond, olympian) stays only on the icon, tier badge,
+     tier dots and progress bar, so tiers are still easy to tell apart. */
+  .ha-kicker, .ha-stat-label, .ha-tier-badge, .ha-state-badge, .ha-criteria summary,
+  .ha-evidence-label, .ha-guide strong, .ha-tier-step, .ha-share-trigger, .ha-share-btn,
+  .ha-scan-status strong, .ha-scan-banner-text strong, .ha-share-head strong,
+  .ha-progress-text, .ha-loading, .ha-share-placeholder {
+    font-family: var(--theme-font-sans) !important;
+    text-transform: none !important; letter-spacing: normal !important;
+  }
+  .ha-page [class*="ha-tier-"] { box-shadow: none !important; }
+  .ha-hero, .ha-guide > div, .ha-scan-status, .ha-scan-banner, .ha-share-dialog {
+    background: var(--sh-card) !important; border-color: var(--sh-border) !important;
+    border-radius: 12px;
+  }
+  .ha-hero:before { display: none !important; }
+  .ha-kicker { font-size: 13px !important; color: var(--sh-muted) !important; }
+  .ha-stat-label { font-size: 13px !important; }
+  .ha-guide strong { font-size: 14px !important; font-weight: 600; color: var(--sh-fg); }
+
+  /* filter buttons -> pill tabs */
+  .ha-pills { background: var(--sh-surface); border-radius: 8px; padding: 3px; gap: 2px !important; }
+  .ha-pills button {
+    border: 0 !important; border-radius: 6px; background: transparent !important;
+    color: var(--sh-muted) !important; font-size: 13px !important; font-weight: 500;
+    padding: 4px 10px !important;
+  }
+  .ha-pills button:hover { color: var(--sh-fg) !important; }
+  .ha-pills button.active {
+    background: var(--sh-bg) !important; color: var(--sh-fg) !important;
+    box-shadow: 0 0 0 1px var(--sh-input);
+  }
+
+  /* achievement cards */
+  .ha-card {
+    background: var(--sh-card) !important; border: 1px solid var(--sh-border) !important;
+    border-radius: 12px; transition: border-color .12s ease !important;
+  }
+  .ha-card:hover { border-color: var(--sh-input) !important; }
+  .ha-lucide { filter: none !important; }
+  .ha-card-title { font-weight: 600 !important; letter-spacing: -0.01em !important; }
+  .ha-description { font-size: 14px !important; }
+  .ha-tier-badge, .ha-state-badge {
+    border: 1px solid var(--sh-border) !important; background: var(--sh-surface) !important;
+    border-radius: 6px; font-size: 12px !important; font-weight: 500; padding: 1px 8px !important;
+  }
+  .ha-state-badge { color: var(--sh-muted) !important; }
+  .ha-criteria {
+    border: 1px solid var(--sh-border) !important; background: transparent !important;
+    border-radius: 8px; overflow: hidden;
+  }
+  .ha-criteria summary { color: var(--sh-muted) !important; font-size: 13px !important; }
+  .ha-criteria summary:hover { background: var(--sh-surface) !important; color: var(--sh-fg) !important; }
+  .ha-criteria p { border-top-color: var(--sh-border) !important; color: var(--sh-muted) !important; font-size: 13px !important; }
+  .ha-evidence-label { color: var(--sh-muted); }
+  .ha-progress-track, .ha-scan-progress-track {
+    height: 6px !important; border: 0 !important; border-radius: 999px;
+    background: var(--sh-surface) !important;
+  }
+  .ha-progress-fill { background: var(--ha-tier) !important; border-radius: 999px; }
+  .ha-scan-progress-fill { background: var(--sh-primary) !important; border-radius: 999px; }
+  .ha-progress-text { font-variant-numeric: tabular-nums; font-size: 12px !important; }
+  .ha-state-secret:after { display: none !important; }
+
+  /* recent unlocks + tier legend */
+  .ha-chip {
+    border: 1px solid var(--sh-border) !important; background: var(--sh-card) !important;
+    color: var(--sh-fg) !important; border-radius: 6px; font-size: 13px !important;
+  }
+  .ha-chip-icon { color: var(--ha-tier); }
+  .ha-tier-step {
+    border: 1px solid var(--sh-border) !important; background: var(--sh-surface) !important;
+    color: var(--sh-fg) !important; border-radius: 6px; font-size: 12px !important;
+  }
+  .ha-tier-step i { border-radius: 999px; }
+
+  /* scan status, share dialog, odds and ends */
+  .ha-scan-pulse, .ha-slot-star { background: var(--sh-primary) !important; color: var(--sh-primary); animation: none !important; box-shadow: none !important; }
+  .ha-slot-star { background: none !important; }
+  .ha-share-trigger {
+    border: 1px solid var(--sh-input) !important; background: transparent !important;
+    color: var(--sh-fg) !important; border-radius: 6px; font-size: 12px !important;
+  }
+  .ha-share-trigger:hover { background: var(--sh-surface) !important; }
+  .ha-share-btn, .ha-share-close { border-radius: 6px; border-color: var(--sh-input) !important; }
+  .ha-share-btn { font-size: 13px !important; font-weight: 500; }
+  .ha-share-btn-primary {
+    background: var(--sh-primary) !important; color: var(--sh-primary-fg) !important;
+    border-color: transparent !important;
+  }
+  .ha-share-preview { border-radius: 8px; }
+  .ha-skeleton { border-radius: 6px !important; }
 
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; }
