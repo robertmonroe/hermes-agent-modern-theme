@@ -160,6 +160,23 @@ customCSS: |
   input, select, textarea {
     border-radius: 6px !important; border-color: var(--sh-input) !important;
   }
+  /* dropdowns: the button matches inputs, the open list matches cards */
+  button[role="combobox"] { border-radius: 6px !important; border-color: var(--sh-input) !important; }
+  [role="listbox"] { border-radius: 8px !important; overflow: hidden; }
+
+  /* toggles: softly rounded track and knob, accent when on */
+  button[role="switch"] {
+    border-radius: 6px !important; border-color: var(--sh-input) !important;
+    background: var(--sh-surface) !important;
+  }
+  button[role="switch"] > span { border-radius: 4px !important; background: var(--sh-muted) !important; }
+  button[role="switch"][aria-checked="true"] {
+    background: var(--sh-primary) !important; border-color: transparent !important;
+  }
+  button[role="switch"][aria-checked="true"] > span {
+    background: var(--sh-primary-fg) !important; translate: 18px 0 !important;
+  }
+
   input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
     outline: none !important;
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--sh-ring) 50%, transparent) !important;
